@@ -1216,6 +1216,9 @@ export class BattleTooltips {
 			if (ability === 'unburden' && clientPokemon.volatiles['itemremoved'] && !item) {
 				speedModifiers.push(2);
 			}
+			if (ability === 'braveappetite' && clientPokemon.volatiles['itemremoved'] && !item) {
+				stats.atk = Math.floor(stats.atk * 2);
+			}
 			for (const statName of Dex.statNamesExceptHP) {
 				if (clientPokemon.volatiles['protosynthesis' + statName] || clientPokemon.volatiles['quarkdrive' + statName]) {
 					if (statName === 'spe') {
@@ -1586,6 +1589,15 @@ export class BattleTooltips {
 		if (move.id === 'revelationdance') {
 			moveType = pokemonTypes[0];
 		}
+		if (move.id === 'naturalselection') {
+			moveType = pokemonTypes[0];
+		}
+		if (move.id === 'inhale') {
+			moveType = pokemonTypes[0];
+		}
+		if (move.id === 'aegisslash') {
+			moveType = pokemonTypes[0];
+		}
 		// Moves that require an item to change their type.
 		let item = this.battle.dex.items.get(value.itemName);
 		if (move.id === 'multiattack' && item.onMemory) {
@@ -1647,6 +1659,9 @@ export class BattleTooltips {
 		// Aura Wheel as Morpeko-Hangry changes the type to Dark
 		if (move.id === 'aurawheel' && pokemon.getSpeciesForme() === 'Morpeko-Hangry') {
 			moveType = 'Dark';
+		}
+		if (move.id === 'masamunecutter' && pokemon.getSpeciesForme() === 'Sephiroth-Angel') {
+			moveType = 'Flying';
 		}
 		// Raging Bull's type depends on the Tauros forme
 		if (move.id === 'ragingbull') {
@@ -1711,6 +1726,19 @@ export class BattleTooltips {
 			if (isSound && value.abilityModify(0, 'Liquid Voice')) {
 				moveType = 'Water';
 			}
+			
+			if (isSound && value.abilityModify(0, 'Celestial Melody: Plant')) moveType = 'Grass';
+			if (isSound && value.abilityModify(0, 'Celestial Melody: Cold')) moveType = 'Ice';
+			if (isSound && value.abilityModify(0, 'Celestial Melody: Air')) moveType = 'Flying';
+			if (isSound && value.abilityModify(0, 'Celestial Melody: Water')) moveType = 'Water';
+			if (isSound && value.abilityModify(0, 'Celestial Melody: Earth')) moveType = 'Ground';
+			if (isSound && value.abilityModify(0, 'Celestial Melody: Fire')) moveType = 'Fire';
+			if (isSound && value.abilityModify(0, 'Celestial Melody: Plasma')) moveType = 'Psychic';
+			if (isSound && value.abilityModify(0, 'Celestial Melody: Shadow')) moveType = 'Ghost';
+			if (isSound && value.abilityModify(0, 'Celestial Melody: Mech')) moveType = 'Steel';
+			if (isSound && value.abilityModify(0, 'Celestial Melody: Crystal')) moveType = 'Rock';
+			if (isSound && value.abilityModify(0, 'Celestial Melody: Poison')) moveType = 'Poison';
+			if (isSound && value.abilityModify(0, 'Celestial Melody: Supernatural')) moveType = 'Electric';
 		}
 
 		if (move.id === 'photongeyser' || move.id === 'lightthatburnsthesky' ||
@@ -1997,6 +2025,13 @@ export class BattleTooltips {
 			}
 			value.set(20 + 20 * boostCount);
 		}
+		if (move.id === 'infernalclimax' && target) {
+			let boostCount = 0;
+			for (const boost of Object.values(pokemon.boosts)) {
+				if (boost > 0) boostCount += boost;
+			}
+			value.set(25 + 5 * boostCount);
+		}
 		if (move.id === 'trumpcard') {
 			const pp = this.ppUsed(move, pokemon);
 			const ppLeft = 5 - (typeof pp === 'number' ? pp : pp[1]);
@@ -2076,6 +2111,9 @@ export class BattleTooltips {
 			if (max > 150) max = 150;
 			value.setRange(min, max);
 		}
+		if (move.id === 'dragonlunge' && pokemon.getSpeciesForme() === 'Corrin-Dragon' && target) {
+			value.set(120, 'Dragon Blood');
+		}
 		// Moves which have base power changed due to items
 		if (serverPokemon.item) {
 			let item = this.battle.dex.items.get(serverPokemon.item);
@@ -2150,18 +2188,31 @@ export class BattleTooltips {
 		if (move.secondaries) {
 			value.abilityModify(1.3, "Sheer Force");
 		}
-		if (move.flags['contact']) {
+		if (move.flags['contact'] || (move.id === 'dragonlunge' && pokemon.getSpeciesForme() === 'Corrin-Dragon')) {
 			value.abilityModify(1.3, "Tough Claws");
 		}
 		if (move.flags['sound']) {
 			value.abilityModify(1.3, "Punk Rock");
 		}
-		if (move.flags['slicing']) {
+		if (move.flags['slicing'] && (!(move.id === 'dragonlunge' && pokemon.getSpeciesForme() === 'Corrin-Dragon'))) {
 			value.abilityModify(1.5, "Sharpness");
+		}
+		if (move.flags['sound']) {
+			value.abilityModify(1.3, "Amplifier");
+		}
+		if (move.flags['bullet']) {
+			value.abilityModify(1.3, "Artillery");
 		}
 		for (let i = 1; i <= 5 && i <= pokemon.side.faintCounter; i++) {
 			if (pokemon.volatiles[`fallen${i}`]) {
 				value.abilityModify(1 + 0.1 * i, "Supreme Overlord");
+				value.abilityModify(1 + 0.1 * i, "True Hero");
+				value.abilityModify(1 + 0.1 * i, "Vengeful Spirit");
+			}
+		}
+		for (let i = 5; i >= 1; i--) {
+			if (pokemon.volatiles[`friends${i}`]) {
+				value.abilityModify(1 + 0.05 * i, "Flower's Dream");
 			}
 		}
 		if (target) {
