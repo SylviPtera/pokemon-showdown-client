@@ -2200,9 +2200,6 @@ export class BattleTooltips {
 		if (move.flags['slicing'] && (!(move.id === 'dragonlunge' && pokemon.getSpeciesForme() === 'Corrin-Dragon'))) {
 			value.abilityModify(1.5, "Sharpness");
 		}
-		if (move.flags['sound']) {
-			value.abilityModify(1.3, "Amplifier");
-		}
 		if (move.flags['bullet']) {
 			value.abilityModify(1.3, "Artillery");
 		}
