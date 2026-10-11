@@ -1868,6 +1868,7 @@ export class PokemonSprite extends Sprite {
 		friends3: ['Friends: 3', 'good'],
 		friends4: ['Friends: 4', 'good'],
 		friends5: ['Friends: 5', 'good'],
+		idletransfiguration: ['Idle Transfiguration', 'bad'],
 		noretreat: ['No Retreat', 'bad'],
 		octolock: ['Octolock', 'bad'],
 		tarshot: ['Tar Shot', 'bad'],

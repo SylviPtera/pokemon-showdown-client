@@ -2114,6 +2114,9 @@ export class BattleTooltips {
 		if (move.id === 'dragonlunge' && pokemon.getSpeciesForme() === 'Corrin-Dragon' && target) {
 			value.set(120, 'Dragon Blood');
 		}
+		if (move.id === 'inhale' && pokemon.volatiles['copying'] && pokemon.getTypeList(serverPokemon)[0] === "Normal" && target) {
+			value.set(50, 'Normal Type Inhale');
+		}
 		// Moves which have base power changed due to items
 		if (serverPokemon.item) {
 			let item = this.battle.dex.items.get(serverPokemon.item);
@@ -2203,6 +2206,12 @@ export class BattleTooltips {
 		if (move.flags['bullet']) {
 			value.abilityModify(1.3, "Artillery");
 		}
+		if (this.battle.hasPseudoWeather("Trick Room") ||
+		this.battle.hasPseudoWeather("Magic Room") ||
+		this.battle.hasPseudoWeather("Wonder Room") ||
+		this.battle.hasPseudoWeather("Gravity")) {
+			value.abilityModify(1.3, "Dimension D");
+		}
 		for (let i = 1; i <= 5 && i <= pokemon.side.faintCounter; i++) {
 			if (pokemon.volatiles[`fallen${i}`]) {
 				value.abilityModify(1 + 0.1 * i, "Supreme Overlord");
@@ -2263,6 +2272,8 @@ export class BattleTooltips {
 					value.modify(1.3, 'Power Spot');
 				} else if (allyAbility === 'Steely Spirit' && moveType === 'Steel') {
 					value.modify(1.5, 'Steely Spirit');
+				} else if (allyAbility === 'Amplifier' && move.flags['sound']) {
+					value.modify(1.3, 'Amplifier');
 				}
 			}
 			for (const foe of pokemon.side.foe.active) {
