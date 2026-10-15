@@ -50,6 +50,10 @@ export class ModifiableValue {
 			this.comment.push(` (${itemName} suppressed by Magic Room)`);
 			return false;
 		}
+		if (this.battle.hasPseudoWeather('fairfight')) {
+			this.comment.push(` (${itemName} suppressed by Fair Fight)`);
+			return false;
+		}
 		if (this.pokemon?.volatiles['embargo']) {
 			this.comment.push(` (${itemName} suppressed by Embargo)`);
 			return false;
@@ -1102,6 +1106,7 @@ export class BattleTooltips {
 		if (
 			(ability === 'klutz' && !speedHalvingEVItems.includes(item)) ||
 			this.battle.hasPseudoWeather('Magic Room') ||
+			this.battle.hasPseudoWeather('fairfight') ||
 			clientPokemon?.volatiles['embargo']
 		) {
 			item = '' as ID;

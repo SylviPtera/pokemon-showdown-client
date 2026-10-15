@@ -528,7 +528,7 @@ export class Pokemon implements PokemonDetails, PokemonHealth {
 
 		let item = toID(serverPokemon ? serverPokemon.item : this.item);
 		let ability = toID(this.effectiveAbility(serverPokemon));
-		if (battle.hasPseudoWeather('Magic Room') || this.volatiles['embargo'] || ability === 'klutz') {
+		if (battle.hasPseudoWeather('Magic Room') || battle.hasPseudoWeather('fairfight') || this.volatiles['embargo'] || ability === 'klutz') {
 			item = '' as ID;
 		}
 
