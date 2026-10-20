@@ -38751,6 +38751,7 @@ BattleMoveAnims['bloomstrike'] = { anim: BattleMoveAnims['tropkick'].anim };
 BattleMoveAnims['bombblast'] = { anim: BattleMoveAnims['blazingtorque'].anim };
 BattleMoveAnims['brilliantarrow'] = { anim: BattleMoveAnims['flashcannon'].anim };
 BattleMoveAnims['bulletstorm'] = { anim: BattleMoveAnims['flashcannon'].anim };
+BattleMoveAnims['busterwolf'] = { anim: BattleMoveAnims['flareblitz'].anim };
 BattleMoveAnims['crossslash'] = { anim: BattleMoveAnims['xscissor'].anim };
 BattleMoveAnims['doublehammer'] = { anim: BattleMoveAnims['icehammer'].anim };
 BattleMoveAnims['diamondpickaxe'] = { anim: BattleMoveAnims['stoneaxe'].anim };
@@ -38762,6 +38763,7 @@ BattleMoveAnims['dragonlungerush'] = {
 	},
 };
 BattleMoveAnims['fireworkcannon'] = { anim: BattleMoveAnims['torchsong'].anim };
+BattleMoveAnims['gaiawave'] = { anim: BattleMoveAnims['bulldoze'].anim };
 BattleMoveAnims['goldexperience'] = { anim: BattleMoveAnims['seedflare'].anim };
 BattleMoveAnims['idletransfiguration'] = { anim: BattleMoveAnims['quash'].anim };
 BattleMoveAnims['infernalclimax'] = { anim: BattleMoveAnims['blackholeeclipse'].anim };
@@ -38795,6 +38797,7 @@ BattleMoveAnims['omegaballet'] = { anim: BattleMoveAnims['quiverdance'].anim };
 BattleMoveAnims['omegafist'] = { anim: BattleMoveAnims['focuspunch'].anim };
 BattleMoveAnims['omegapan'] = { anim: BattleMoveAnims['flameburst'].anim };
 BattleMoveAnims['pklove'] = { anim: BattleMoveAnims['psychic'].anim };
+BattleMoveAnims['powergeyser'] = { anim: BattleMoveAnims['precipiceblades'].anim };
 BattleMoveAnims['sexpistols'] = { anim: BattleMoveAnims['flashcannon'].anim };
 BattleMoveAnims['shortcircuit'] = { anim: BattleMoveAnims['thunderclap'].anim };
 BattleMoveAnims['snowgrave'] = { anim: BattleMoveAnims['sheercold'].anim };
